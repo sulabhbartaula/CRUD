@@ -34,13 +34,13 @@ public class StudentController extends HttpServlet {
 			int studentId = Integer.parseInt(request.getParameter("studentId"));
 			int result = dao.deleteStudent(studentId);
 			request.setAttribute("students", dao.getAllStudents());;
-		}else if( action.equalsIgnoreCase( "edit" ) ) {
+		}else if( action.equalsIgnoreCase("edit")){
             forward = INSERTEDIT;
             int studentId = Integer.parseInt( request.getParameter("studentId") );
             Student student = dao.getStudentById(studentId);
             request.setAttribute("student", student);
         }
-        else if( action.equalsIgnoreCase( "insert" ) ) {
+        else if(action.equalsIgnoreCase("insert")){
             forward = INSERTEDIT;
         }
         else {
@@ -56,16 +56,16 @@ public class StudentController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		 	Student student = new Student();
-	        student.setFirstName( request.getParameter( "firstName" ) );
-	        student.setLastName( request.getParameter( "lastName" ) );
-	        student.setCourse( request.getParameter( "course" ) );
-	        student.setYear( Integer.parseInt( request.getParameter( "year" ) ) );
+	        student.setFirstName(request.getParameter("firstName"));
+	        student.setLastName(request.getParameter("lastName"));
+	        student.setCourse(request.getParameter("course"));
+	        student.setYear(Integer.parseInt(request.getParameter("year")));
 	        String studentId = request.getParameter("studentId");
 	 
-	        if( studentId == null || studentId.isEmpty() )
+	        if(studentId == null || studentId.isEmpty())
 	            dao.addStudent(student);
 	        else {
-	            student.setStudentId( Integer.parseInt(studentId) );
+	            student.setStudentId(Integer.parseInt(studentId));
 	            dao.updateStudent(student);
 	        }
 	        RequestDispatcher view = request.getRequestDispatcher(LIST_STUDENT);
